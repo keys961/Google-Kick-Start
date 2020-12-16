@@ -1,3 +1,5 @@
+[![green-pi](https://img.shields.io/badge/Rendered%20with-Green%20Pi-00d571?style=flat-square)](https://github.com/nschloe/green-pi?activate&inlineMath=$)
+
 # Kick Start 2020 A
 
 ## A: Allocation
