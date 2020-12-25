@@ -101,6 +101,8 @@ void solve(int case_id, vector<int>& arr, int q) {
             ans += flag * (query(t1, a, b + 1) - (a - 1) * query(t2, a, b + 1));
         }
     }
+    drop(t1);
+    drop(t2);
     cout << "Case #" << case_id << ": " << ans << endl;
 }
 
