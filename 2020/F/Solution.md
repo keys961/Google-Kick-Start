@@ -45,6 +45,7 @@
 这里定义一个函数 $f(pos_A, pos_B, cnt_A, cnt_B)$ ，它表示在 $A$ 为先手， $A$ 访问了 $cnt_A$ 个房屋， $B$ 访问了 $cnt_B$ 个房屋的情况下， $A$ 能获取的最高得分。
 
 那么可以得到下面的递推式：
+
 $$
 \begin{equation}
 f(pos_A, pos_B, cnt_A, cnt_B)=
@@ -57,6 +58,7 @@ f(pos_A, pos_B, cnt_A, cnt_B)=
 \right.
 \end{equation}
 $$
+
 这个递推式可通过DFS搜索得到。
 
 而对于时间复杂度，易知除了第一步之外，其它步骤最多只有2个扇出，所以有：
