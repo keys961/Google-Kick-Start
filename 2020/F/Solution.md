@@ -48,7 +48,9 @@
 
 $$
 \begin{equation}
+
 f(pos_A, pos_B, cnt_A, cnt_B)=
+
 \left\{
              \begin{array}{lr}
              \max{\lbrace -f(pos_B, nextpos_A, cnt_B, cnt_A+1)\rbrace} & 当A可以移动,nextpos_A合法 \\
@@ -56,6 +58,7 @@ f(pos_A, pos_B, cnt_A, cnt_B)=
              cnt_A - cnt_B & 当A和B都不能移动  
              \end{array}
 \right.
+
 \end{equation}
 $$
 
