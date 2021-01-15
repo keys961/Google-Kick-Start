@@ -7,32 +7,45 @@
 
 using namespace std;
 
-void dfs(vector<long long>& arr, double cur_score, double& total_score, double& times) {
-    if (arr.size() == 2) {
-        cur_score += arr[0] + arr[1];
-        total_score += cur_score;
-        times += 1;
-        return;
+double dfs(int i, int j, vector<vector<double>>& kdp) {
+    if(i == 1) {
+        return 0.0;
+    }
+    if(i == 2) {
+        kdp[i][j] = 1.0;
+        return 1.0;
     }
 
-    for(int i = 0; i < arr.size() - 1; i++) {
-        vector<long long> new_arr(arr.size() - 1);
-        for(int j = 0; j < i; j++) {
-            new_arr[j] = arr[j];
-        }
-        new_arr[i] = arr[i] + arr[i + 1];
-        for(int j = i + 2; j < arr.size(); j++) {
-            new_arr[j - 1] = arr[j];
-        }
-        dfs(new_arr, cur_score +  arr[i] + arr[i + 1], total_score, times);
+    if(kdp[i][j] > 0) {
+        return kdp[i][j];
     }
+    double ans;
+    if(j == 1 || i == j) {
+        ans = 1.0;
+    } else {
+        ans = 2.0;
+    }
+
+    int moved_cnt = j - 1;
+    if(moved_cnt > 0) {
+        ans += moved_cnt * dfs(i - 1, j - 1, kdp);
+    }
+    if(i - moved_cnt - 1 > 0) {
+        ans += (i - moved_cnt - 1) * dfs(i - 1, j, kdp);
+    }
+    ans /= (i * 1.0 - 1);
+    kdp[i][j] = ans;
+    return ans;
 }
 
 void solve(int case_id, vector<long long>& arr) {
-    double total_score = 0.0;
-    double times = 0.0;
-    dfs(arr, 0, total_score, times);
-    printf("Case #%d: %.6f\n", case_id, total_score / times);
+    double score = 0.0;
+    vector<vector<double>> kdp = vector<vector<double>>(arr.size() + 1, vector<double>(arr.size() + 1));
+    for(int i = 1; i <= arr.size(); i++) {
+        double coefficient = dfs(arr.size(), i, kdp);
+        score += arr[i - 1] * coefficient;
+    }
+    printf("Case #%d: %.6f\n", case_id, score);
 }
 
 int main() {
